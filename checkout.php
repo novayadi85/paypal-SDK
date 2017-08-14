@@ -1,4 +1,6 @@
 <?php  
+require "app/start.php";
+
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
@@ -23,19 +25,19 @@ $itemList = new ItemList();
 $itemList->setItems([$item]);
 
 $details = new Details();
-$details->setShipping()
-    ->setTax()
-    ->setSubtotal();
+$details->setShipping(5)
+    ->setTax(1)
+    ->setSubtotal(200);
 	
 $amount = new Amount();
-$amount->setCurrency()
-    ->setTotal()
+$amount->setCurrency("USD")
+    ->setTotal(206)
     ->setDetails($details);
 	
 $transaction = new Transaction();
 $transaction->setAmount($amount)
     ->setItemList($itemList)
-    ->setDescription()
+    ->setDescription("Test")
     ->setInvoiceNumber(uniqid());
 	
 $baseUrl = SITE_URL;
@@ -56,7 +58,9 @@ $request = clone $payment;
 try {
     $payment->create($apiContext);
 }catch (Exception $ex) {
-	
+	/* print "<pre>";
+	print_r($ex);
+	print "</pre>"; */
 	exit(1);
 }
 

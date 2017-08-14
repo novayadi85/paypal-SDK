@@ -21,11 +21,11 @@ $execute->setPayerId($payerId);
 
 try{
 	$result = $payment->execute($execute , $apiContext );
+	/* var_dump($result); */
+	print "Thanks for Payment";
 }
 catch(Exception $e){
 	$data = json_decode($e->getData());
 	var_dump($data->message);
 	die();
 }
-/* var_dump($result); */
-print "Thanks for Payment";

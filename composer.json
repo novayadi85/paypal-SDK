@@ -1,5 +1,5 @@
 {
 	"require" : {
-		"paypal/rest-api-sdk-php":"1.12.*"
+		"paypal/rest-api-sdk-php":"*"
 	}
 }
